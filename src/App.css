@@ -1,38 +1,72 @@
-.App {
-  text-align: center;
+.body {
+	font-size: 12px;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.game-container {
+	background-color: #14bdac;
+	padding: 10px 0;
+	perspective: 100px;
+	position: relative;	
+	z-index: 0;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.game-container .background-path {	
+	fill: none;	
+	stroke: black;	
+	stroke-width: 16px;	
+	transition: stroke-dashoffset 0.225s cubic-bezier(0.4,0,0.2,1);	
+	-webkit-transition: stroke-dashoffset 0.225s cubic-bezier(0.4,0,0.2,1);
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.game-container path:not(:only-of-type){	
+	transition-duration: 0.125s;	
+	-webkit-transition-duration: 0.125s;
+} 
+.game-container .scv-background path {	
+	stroke: #0da192;	
+	stroke-width: 6px;	
+	transition-duration: 0.375s;	
+	-webkit-transition-duration: 0.375s;
 }
-
-.App-link {
-  color: #61dafb;
+.tic-tac-toe-table,
+.scv-background {	
+	transition: opacity .5s cubic-bezier(0.4,0.0,1,1),transform .5s cubic-bezier(0.4,0.0,1,1),visibility .5s step-end;	
+	-webkit-transition: opacity .5s cubic-bezier(0.4,0.0,1,1),transform .5s cubic-bezier(0.4,0.0,1,1),visibility .5s step-end;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.scv-background {	
+	margin: auto;	
+	right: 0px;	
+	z-index: 0;
+}
+.scv-position {	
+	height: 100%;	
+	left: 0px;	
+	position: absolute;	
+	top: 0px;	
+	width: 100%;
+}
+.tic-tac-toe-table {	
+	border-spacing: 6px;	
+	margin: 0 auto;	
+	position: relative;	
+	z-index: 3;
+}
+.tic-tac-toe-table td {	
+	height: 48px;	
+	width: 48px;	
+	padding: 8px;	
+	vertical-align: top;	
+	position: relative;
+	text-align: center;
+	font-size: 3.6em;
+	line-height: 48px;
+	
+}
+.restart {	
+	margin: 0;	
+	width: 100%;	
+	z-index: 1;	
+	text-align: center;
+}
+.restart button {	
+	margin: 10px auto;	
+	padding: 10px 8px;	
+	background-color: transparent;
 }

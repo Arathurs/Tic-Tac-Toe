@@ -1,0 +1,6 @@
+.tic-tac-toe td {	
+	height: 48px;	
+	weight: 48px;	
+	padding: 8px;	
+	vertical-align: top;
+}
