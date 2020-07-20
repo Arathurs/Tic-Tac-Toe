@@ -12,6 +12,7 @@ export class GameContainer extends React.Component {
 			rowTwo: ["","",""],
 			rowThree: ["","",""],
 			emptyPlaces: [],
+			game: false,
 			draw: false,
 			winner: false,
 			winnerName: '',
@@ -138,7 +139,8 @@ export class GameContainer extends React.Component {
 					const obj = {
 						winner: true,
 						winnerName: player,
-						winnerSymbol: symbol
+						winnerSymbol: symbol,
+						game: false
 					};
 					return obj;
 				} else {
@@ -161,7 +163,8 @@ export class GameContainer extends React.Component {
 		if(!places.length) {
 			
 			this.setState({
-				draw: true
+				draw: true,
+				game: false
 			});
 			
 			return;
@@ -203,30 +206,30 @@ export class GameContainer extends React.Component {
 		
 	}
 	
-	componentWillMount(){
+	/*componentWillMount(){
 		
 		const places = this.findEmptyPlaces(this.state.rowOne, this.state.rowTwo, this.state.rowThree);
 		this.setState({
 			emptyPlaces: places
 		});
 		
-	}
+	}*/
 	
 	componentDidUpdate(prevProps, prevState) {
 		
 		console.log('inside component did update',this.state.winner,this.state.draw, this.state.emptyPlaces.length);
-		if(!this.state.winner && !this.state.draw && this.state.emptyPlaces.length && this.state.player !== 'Player 1') {
+		if(!this.state.winner && !this.state.draw /*&& this.state.emptyPlaces.length */&& this.state.player !== 'Player 1') {
 
 			console.log('inside component did update first if');
 			this.computerTakesTurn();
 			
-		} else if (!this.state.winner && !this.state.draw && !this.state.emptyPlaces.length) {
+		}/* else if (!this.state.winner && !this.state.draw && !this.state.emptyPlaces.length) {
 			
 			console.log('inside component did update second if');
 			this.setState({
 				draw: true
 			});
-		}
+		}*/
 		
 		
 	}
@@ -252,7 +255,7 @@ export class GameContainer extends React.Component {
 		let stringify = JSON.stringify(this.state);		
 		console.log(stringify,'rendering');		
 		
-		return <GameTable player={this.state.player} symbol={this.state.playerSymbol} one={this.state.rowOne} two={this.state.rowTwo} three={this.state.rowThree} draw={this.state.draw} winner={this.state.winner} winnerName={this.state.winnerName} winnerSymbol={this.state.winnerSymbol} arrayEquals={this.arrayEquals} getMissingRows={this.findMissingRows} didIWin={this.isThereAWinner} restart={this.restartGame} place={this.placeSymbol}/>;
+		return <GameTable player={this.state.player} symbol={this.state.playerSymbol} one={this.state.rowOne} two={this.state.rowTwo} three={this.state.rowThree} game={this.state.game} draw={this.state.draw} winner={this.state.winner} winnerName={this.state.winnerName} winnerSymbol={this.state.winnerSymbol} arrayEquals={this.arrayEquals} getMissingRows={this.findMissingRows} didIWin={this.isThereAWinner} restart={this.restartGame} place={this.placeSymbol}/>;
 		
 	}	
 }

@@ -24,28 +24,30 @@ export class TableRow extends React.Component {
 	}
 	
 	handleClick(e) {		
-		//document.getElementsByClassName(".recipe-name").innerHTML;		
+			
 		const string = e.target.textContent;				
 		
 		if(!string) {			
 			console.log('got here');			
 			const indexInArr = e.target.dataset.index,
 				temp = this.props.data.slice(),
-				row = this.props.arrName,
-				//missingRows = this.props.collectMissingRows(row),
-				row2 = this.props.restOfData[0],
-				row3 = this.props.restOfData[1];
+				row = this.props.arrName;
 			let	obj = {
-					player: this.props.player === 'Player 1' ? 'Computer' : 'Player 1',
-					playerSymbol: this.props.symbol === 'X' ? 'O' : 'X'
-				};
+				player: this.props.player === 'Player 1' ? 'Computer' : 'Player 1',
+				playerSymbol: this.props.symbol === 'X' ? 'O' : 'X'
+			};
 			
+			if (!this.props.game) {
+				
+				const game = 'game'
+				obj[game] = true;
+			}
 				//const game = 'game';
 				//obj[game] = true;
 			console.log('got here two',temp);
 			temp[indexInArr] = this.props.symbol;	
 			obj[row] = temp.slice();
-			console.log(temp,'test',this.props.player, obj[row], row2, row3);
+			console.log(temp,'test',this.props.player, obj[row]/*, row2, row3*/);
 			
 			const win = this.props.didIWin(this.props.symbol, this.props.player, obj[row], row);
 		
