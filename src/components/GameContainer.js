@@ -110,7 +110,7 @@ export class GameContainer extends React.Component {
 		}
 		
 		const comparisonArray = [symbol, symbol, symbol];
-		console.log(comparisonArray,'compare');
+		//console.log(comparisonArray,'compare');
 		const control = comparisonArray;
 		const arr4 = [row1[0], row2[0], row3[0]];
 		const arr5 = [row1[1], row2[1], row3[1]];
@@ -125,7 +125,7 @@ export class GameContainer extends React.Component {
 		const isArr6Equal = this.arrayEquals(control, arr6.slice());
 		const isArr7Equal = this.arrayEquals(control, arr7.slice());
 		const isArr8Equal = this.arrayEquals(control, arr8.slice());
-		console.log(control, row1, row2, row3, arr4, arr5, arr6, arr7, arr8, isArr1Equal, isArr2Equal, isArr3Equal,	isArr4Equal, isArr5Equal, isArr6Equal, isArr7Equal, isArr8Equal);
+		//console.log(control, row1, row2, row3, arr4, arr5, arr6, arr7, arr8, isArr1Equal, isArr2Equal, isArr3Equal,	isArr4Equal, isArr5Equal, isArr6Equal, isArr7Equal, isArr8Equal);
 			
 			if( isArr1Equal ||
 			    isArr2Equal ||
@@ -237,8 +237,19 @@ export class GameContainer extends React.Component {
 	restartGame() {
 		
 		this.setState({	
-			game: true	
-		});	
+			player: 'Player 1',
+			playerSymbol: 'X', 
+			rowOne: ["","",""],
+			rowTwo: ["","",""],
+			rowThree: ["","",""],
+			emptyPlaces: [],
+			game: false,
+			draw: false,
+			winner: false,
+			winnerName: '',
+			winnerSymbol: ''
+		});
+	
 	}		
 	
 	placeSymbol(stateObject) {		

@@ -17,7 +17,7 @@ export const GameHeading = props => {
 			
 		} else {
 				
-			titleText = <h1 style={{textAlign: 'center'}}><span style={{color: styles.eggshell, fontWeight: styles.fontWeight }} >{props.winnerSymbol}</span> won. Start a new game!</h1>;
+			titleText = <h1 style={{textAlign: 'center'}}><span style={{color: styles.eggShell, fontWeight: styles.fontWeight }} >{props.winnerSymbol}</span> won. Start a new game!</h1>;
 				
 		}
 			
@@ -29,11 +29,11 @@ export const GameHeading = props => {
 			
 		if(props.symbol === 'X') {
 				
-			titleText = <h1 style={{textAlign: 'center'}}>It's <span style={{color: styles.black, fontWeight: styles.fontWeight }} >{props.symbol}</span> Turn</h1>;
+			titleText = <h1 style={{textAlign: 'center'}}><span style={{color: styles.black, fontWeight: styles.fontWeight }} >{props.symbol}</span> Turn</h1>;
 				
 		} else {
 				
-			titleText = <h1 style={{textAlign: 'center'}}>It's <span style={{color: styles.eggshell, fontWeight: styles.fontWeight }} >{props.symbol}</span> Turn</h1>;
+			titleText = <h1 style={{textAlign: 'center'}}><span style={{color: styles.eggShell, fontWeight: styles.fontWeight }} >{props.symbol}</span> Turn</h1>;
 				
 		}
 			
