@@ -1,12 +1,7 @@
 import React from 'react';
 import '../App.css';
-
-const style = {
-	color: {
-		white: '#FFFFFF',
-		black: '#000000'
-	}
-};
+import { styles } from '../assets/styles';
+import { constants } from '../assets/constants';
 
 export class TableRow extends React.Component {	
 	constructor(props) {		
@@ -28,35 +23,45 @@ export class TableRow extends React.Component {
 		const string = e.target.textContent;				
 		
 		if(!string) {			
-			console.log('got here');			
+			console.log('got here human turn');			
+			
 			const indexInArr = e.target.dataset.index,
 				temp = this.props.data.slice(),
 				row = this.props.arrName;
-			let	obj = {
-				player: this.props.player === 'Player 1' ? 'Computer' : 'Player 1',
-				playerSymbol: this.props.symbol === 'X' ? 'O' : 'X'
-			};
+			let	obj = {},
+				player;
+			if (!this.props.draw && !this.props.winner && !this.props.turn) {
+				player = constants.symbols.x;
+				obj[constants.statePropertyNames.firstPlayer] = constants.players.human;
+				obj[constants.statePropertyNames.player] = constants.symbols.o;
+				obj[constants.statePropertyNames.turn] = constants.players.computer;
 			
-			if (!this.props.game) {
+			} else if (!this.props.draw && !this.props.winner && this.props.turn) {
+				player = this.props.player;
+				obj[constants.statePropertyNames.player] = this.props.player === constants.symbols.x ? constants.symbols.o : constants.symbols.x;
+				obj[constants.statePropertyNames.turn] = constants.players.computer;	
 				
-				const game = 'game'
-				obj[game] = true;
 			}
-				//const game = 'game';
-				//obj[game] = true;
-			console.log('got here two',temp);
-			temp[indexInArr] = this.props.symbol;	
-			obj[row] = temp.slice();
-			console.log(temp,'test',this.props.player, obj[row]/*, row2, row3*/);
+						
 			
-			const win = this.props.didIWin(this.props.symbol, this.props.player, obj[row], row);
+			console.log('got here two',temp, indexInArr, player);
+			temp[indexInArr] = player;	
+			obj[row] = temp.slice();
+			console.log(temp,'test',player, obj[row]);
+			
+			const win = this.props.didIWin(player, obj[row], row);
 		
 			if(win) {
 				console.log('before change: ',obj);
 				const stateObject = Object.assign({}, obj, win);
 				obj = stateObject;
 				console.log('after change: ',obj);
-			} 
+			} else if (!win && this.props.emptyBlocks.length === 1) {
+				
+				obj[constants.statePropertyNames.draw] = true;
+				obj[constants.statePropertyNames.turn] = null;
+				
+			}
 		
 			this.props.place(obj);
 		}	
@@ -64,18 +69,18 @@ export class TableRow extends React.Component {
 	
 	render() {	
 		console.log('table row is rendering');
-		const dataPoints = this.props.data.map((point, i) => {
-			if(point === 'X') {
+		const dataPoints = this.props.data.map((data, i) => {
+			if(data === constants.symbols.x) {
 				
-				return <td style={{color: style.color.black}} key={"data_"+i} data-index={i} onClick={this.handleClick} >{ point }</td>;
+				return <td style={{color: styles.colors.black}} key={"data_"+i} data-index={i} onClick={this.handleClick} >{data}</td>;
 			
-			} else if(point === 'O') {
+			} else if(data === constants.symbols.o) {
 				
-				return <td style={{color: style.color.white}} key={"data_"+i} data-index={i} onClick={this.handleClick} >{ point }</td>;
+				return <td style={{color: styles.colors.eggShell}} key={"data_"+i} data-index={i} onClick={this.handleClick} >{data}</td>;
 			
 			} else {
 			
-				return <td key={"data_"+i} data-index={i} onClick={this.handleClick} >{ point }</td>;
+				return <td key={"data_"+i} data-index={i} onClick={this.handleClick} >{data}</td>;
 			
 			}	
 		});

@@ -1,39 +1,40 @@
 import React from 'react';
 import { styles } from '../assets/styles';
+import { constants } from '../assets/constants';
+import { TitleText } from './TitleText';
 
 export const GameHeading = props => {
 	
 	let titleText;				
-	
-	if(!props.game && !props.winnerSymbol && !props.draw) {
+	if(!props.turn && !props.draw && !props.draw) {
 			
-		titleText = <h1 style={{textAlign: 'center'}}>Start a new game!</h1>;
+		titleText = <TitleText message={constants.messages.startGame} style={{textAlign: 'center'}}/>;
 		
-	} else if(props.winnerSymbol) {
+	} else if(props.winner) {
 			
-		if(props.winnerSymbol === 'X') {
+		if(props.winner === constants.symbols.x) {
 		
-			titleText = <h1 style={{textAlign: 'center'}}><span style={{color: styles.black, fontWeight: styles.fontWeight }} >{props.winnerSymbol}</span> won. Start a new game!</h1>;
+			titleText = <TitleText message={constants.messages.newGameAfterWin}><span style={{color: styles.colors.black, fontWeight: styles.font.fontWeight }}>{props.winner}</span></TitleText>;
 			
 		} else {
-				
-			titleText = <h1 style={{textAlign: 'center'}}><span style={{color: styles.eggShell, fontWeight: styles.fontWeight }} >{props.winnerSymbol}</span> won. Start a new game!</h1>;
+			
+			titleText = <TitleText message={constants.messages.newGameAfterWin}><span style={{color: styles.colors.eggShell, fontWeight: styles.font.fontWeight }}>{props.winner}</span></TitleText>;
 				
 		}
 			
 	} else if(props.draw) {
 			
-		titleText = <h1 style={{textAlign: 'center'}}>l}It's a Draw</h1>;
+		titleText = <TitleText message={constants.messages.draw} style={{textAlign: 'center'}}/>;
 			
-	} else if (props.game && !props.winnerSymbol && !props.draw) {
+	} else if (props.turn) {
 			
-		if(props.symbol === 'X') {
-				
-			titleText = <h1 style={{textAlign: 'center'}}><span style={{color: styles.black, fontWeight: styles.fontWeight }} >{props.symbol}</span> Turn</h1>;
+		if(props.symbol === constants.symbols.x ) {
+		
+			titleText = <TitleText message={constants.messages.turn}><span style={{color: styles.colors.black, fontWeight: styles.font.fontWeight }}>{props.player}</span></TitleText>;
 				
 		} else {
 				
-			titleText = <h1 style={{textAlign: 'center'}}><span style={{color: styles.eggShell, fontWeight: styles.fontWeight }} >{props.symbol}</span> Turn</h1>;
+			titleText = <TitleText message={constants.messages.turn}><span style={{color: styles.colors.eggShell, fontWeight: styles.font.fontWeight }}>{props.player}</span></TitleText>;
 				
 		}
 			

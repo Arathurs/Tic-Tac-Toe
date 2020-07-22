@@ -1,6 +1,10 @@
 export const styles = {
-	eggShell: 'rgb(242, 235, 211)',
-	white: '#fff',
-	black: '#000',
-	fontWeight: 'bold'
+	colors: {
+		eggShell: 'rgb(242, 235, 211)',
+		white: '#fff',
+		black: '#000'
+	},
+	font: {
+		fontWeight: 'bold'
+	}
 };
