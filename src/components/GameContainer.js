@@ -1,6 +1,6 @@
 import React from 'react';
 import { constants } from '../assets/constants';
-import { GameTable } from './GameTable';
+import { GameTableContainer } from './GameTableContainer';
 
 //simplify state and other variables
 //replace playerSymbol with player
@@ -278,7 +278,7 @@ export class GameContainer extends React.Component {
 		let stringify = JSON.stringify(this.state);		
 		console.log(stringify,'rendering');		
 		
-		return <GameTable player={this.state.player} one={this.state.rowOne} two={this.state.rowTwo} three={this.state.rowThree} draw={this.state.draw} winner={this.state.winner} turn={this.state.turn} arrayEquals={this.arrayEquals} didIWin={this.isThereAWinner} restart={() => this.restartGame()} place={this.placeSymbol} emptyBlocks={this.state.emptyPlaces}/>;
+		return <GameTableContainer player={this.state.player} one={this.state.rowOne} two={this.state.rowTwo} three={this.state.rowThree} draw={this.state.draw} winner={this.state.winner} turn={this.state.turn} arrayEquals={this.arrayEquals} didIWin={this.isThereAWinner} restart={() => this.restartGame()} place={this.placeSymbol} emptyBlocks={this.state.emptyPlaces}/>;
 		
 	}	
 }

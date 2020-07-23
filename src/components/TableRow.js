@@ -68,7 +68,7 @@ export class TableRow extends React.Component {
 	}		
 	
 	render() {	
-		console.log('table row is rendering');
+		console.log('table row is rendering',JSON.stringify(this.props));
 		const dataPoints = this.props.data.map((data, i) => {
 			if(data === constants.symbols.x) {
 				

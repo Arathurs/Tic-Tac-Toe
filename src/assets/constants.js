@@ -1,3 +1,5 @@
+import React from 'react';
+
 export const constants = {
 	symbols : {
 		x: 'X',
@@ -20,4 +22,12 @@ export const constants = {
 		player: 'player'
 	}
 };
+
+export const SymbolsContext = React.createContext(constants.symbols.x);
+
+export const PlayersContext = React.createContext(constants.players.human);
+
+export const MessagesContext = React.createContext(constants.messages);
+
+export const StatePropertyContext = React.createContext(constants.statePropertyNames);
 			  
