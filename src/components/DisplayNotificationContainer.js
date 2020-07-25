@@ -10,7 +10,7 @@ export function DisplayNotificationContainer (props) {
 							
 				<div className="notification-container">
 					
-					{props.children}
+					{props.render(props.winner)}
 								
 				</div>
 						

@@ -3,7 +3,8 @@ import React from 'react';
 export const constants = {
 	symbols : {
 		x: 'X',
-		o: 'O'
+		o: 'O',
+		xo: 'XO'
 	},
 	players: {
 		human: 'Human',

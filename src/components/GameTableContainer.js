@@ -3,7 +3,7 @@ import { styles, OpacityContext } from '../assets/styles';
 import { constants } from '../assets/constants';
 import { GameTable } from './GameTable';
 import { DisplayNotificationContainer } from './DisplayNotificationContainer';
-import { WinMessage } from './WinMessage';
+import { GameOver } from './WinMessage';
 
 export class GameTableContainer extends React.Component {	
 	
@@ -18,21 +18,17 @@ export class GameTableContainer extends React.Component {
 				
 			);
 			
-		} else if(this.props.winner === constants.symbols.x) {
+		} else if(this.props.winner) {
 			//console.log('if X is the winner', this.props.winner);
 			return (
 
 				<OpacityContext.Provider value={0}>
 					
-					<GameTable winner={this.props.winner} clear={this.props.clearGame} restart={this.props.restart} turn={this.props.turn}  draw={this.props.draw} player={this.props.player} one={this.props.one} two={this.props.two} three={this.props.three} arrayEquals={this.props.arrayEquals} didIWin={this.props.didIWin} place={this.props.place} emptyBlocks={this.props.emptyBlocks}>
+					<GameTable render={winner => (<GameOver winner={winner}>)} winner={this.props.winner} clear={this.props.clearGame} restart={this.props.restart} turn={this.props.turn}  draw={this.props.draw} player={this.props.player} one={this.props.one} two={this.props.two} three={this.props.three} arrayEquals={this.props.arrayEquals} didIWin={this.props.didIWin} place={this.props.place} emptyBlocks={this.props.emptyBlocks}>
 							
 						<DisplayNotificationContainer winner={this.props.winner}>
 						
-							<WinMessage message={constants.messages.won}>
-							
-							{this.props.winner}
-							
-							</WinMessage>
+							<WinMessage message={constants.messages.won} render={this.props.winner} />
 					
 						</DisplayNotificationContainer>			
 							
@@ -52,11 +48,7 @@ export class GameTableContainer extends React.Component {
 							
 						<DisplayNotificationContainer winner={this.props.winner}>
 						
-							<WinMessage message={constants.messages.won}>
-							
-								{this.props.winner}
-							
-							</WinMessage>
+							<WinMessage message={constants.messages.won} render={this.props.winner} />
 					
 						</DisplayNotificationContainer>			
 							
@@ -76,7 +68,7 @@ export class GameTableContainer extends React.Component {
 							
 						<DisplayNotificationContainer winner={this.props.winner}>
 							
-							<WinMessage message={constants.messages.draw}>
+							<WinMessage message={constants.messages.draw} >
 							
 								<span style={{color: styles.colors.black}}>X</span>
 										

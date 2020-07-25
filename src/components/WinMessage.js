@@ -12,7 +12,7 @@ export const WinMessage = props => {
 	
 	return (
 		<>
-			<div style={styleObject} >{props.children}</div>
+			<div style={styleObject} >{props.render}</div>
 								
 			<div style={{color: '#000', opacity: 1}}>{props.message}</div>
 		</>
