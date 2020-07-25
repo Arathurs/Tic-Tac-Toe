@@ -23,7 +23,7 @@ export class TableRow extends React.Component {
 		const string = e.target.textContent;				
 		
 		if(!string) {			
-			console.log('got here human turn');			
+			//console.log('got here human turn');			
 			
 			const indexInArr = e.target.dataset.index,
 				temp = this.props.data.slice(),
@@ -44,18 +44,18 @@ export class TableRow extends React.Component {
 			}
 						
 			
-			console.log('got here two',temp, indexInArr, player);
+			//console.log('got here two',temp, indexInArr, player);
 			temp[indexInArr] = player;	
 			obj[row] = temp.slice();
-			console.log(temp,'test',player, obj[row]);
+			//console.log(temp,'test',player, obj[row]);
 			
 			const win = this.props.didIWin(player, obj[row], row);
 		
 			if(win) {
-				console.log('before change: ',obj);
+				//console.log('before change: ',obj);
 				const stateObject = Object.assign({}, obj, win);
 				obj = stateObject;
-				console.log('after change: ',obj);
+				//console.log('after change: ',obj);
 			} else if (!win && this.props.emptyBlocks.length === 1) {
 				
 				obj[constants.statePropertyNames.draw] = true;
@@ -68,7 +68,7 @@ export class TableRow extends React.Component {
 	}		
 	
 	render() {	
-		console.log('table row is rendering',JSON.stringify(this.props));
+		//console.log('table row is rendering',JSON.stringify(this.props));
 		const dataPoints = this.props.data.map((data, i) => {
 			if(data === constants.symbols.x) {
 				

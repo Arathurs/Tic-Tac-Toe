@@ -1,10 +1,29 @@
 import React from 'react';
 
-export const ChooseXOButton = props => {
+export class ChooseXOButton extends React.Component {
 	
-	return (
-		<div>
-			<button onClick={()=> props.restart(props.player, props.firstPlayer)}>{props.player}</button>
-		</div>
-	);
+	constructor(props) {
+		
+		super(props);
+		
+		this.chooseSymbol = this.chooseSymbol.bind(this);
+	}
+	
+	chooseSymbol() {
+		//console.log(this.props.playerChoice);
+		this.props.restart(this.props.playerChoice);
+	}
+	render() {
+		
+		
+		return (
+
+			<div>
+			
+				<button onClick={this.chooseSymbol}>{this.props.playerChoice}</button>
+		
+			</div>
+		);
+	}
+	
 }

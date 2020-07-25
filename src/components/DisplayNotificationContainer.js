@@ -1,5 +1,4 @@
 import React from 'react';
-import { styles } from '../assets/styles';
 
 export function DisplayNotificationContainer (props) {
 

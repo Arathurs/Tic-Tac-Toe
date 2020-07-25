@@ -1,6 +1,5 @@
 import React from 'react';
-
-import { styles, OpacityContext } from '../assets/styles';
+import { OpacityContext } from '../assets/styles';
 import { constants } from '../assets/constants';
 import { ChooseXOButton } from './ChooseXOButton';
 import { GameHeading } from './GameHeading';
@@ -8,26 +7,21 @@ import { TableRow } from './TableRow';
 
 
 export class GameTable extends React.Component {	
-	constructor(props) {
-		
-		super(props);
-		
-	}
-	
+
 	render () {				
-		console.log('context',this.props.value,this.context);
-		const propString = JSON.stringify(this.props.value),
-		  contextString = JSON.stringify(this.context);
-		 console.log(propString, contextString);
+		//console.log('context',this.props.value,this.context);
+		//const propString = JSON.stringify(this.props.value),
+		//  contextString = JSON.stringify(this.context);
+		// console.log(propString, contextString);
 		return (
 			
 			<div className="container">
 		
 				<div className="button-container">
 				
-					<ChooseXOButton player={constants.symbols.x} firstPlayer={constants.players.humans} restart={this.props.restart} />
+					<ChooseXOButton playerChoice={constants.symbols.x} restart={this.props.restart} />
 						
-					<ChooseXOButton player={constants.symbols.o} firstPlayer={constants.players.computers} restart={this.props.restart} />
+					<ChooseXOButton playerChoice={constants.symbols.o} restart={this.props.restart} />
 			
 				</div>
 					
@@ -59,7 +53,7 @@ export class GameTable extends React.Component {
 					
 				<div className="restart">
 						
-					<button onClick={this.props.restart} style={{padding: 'auto'}} >Restart Game</button>				
+					<button onClick={this.props.clear} style={{padding: 'auto'}} >Restart Game</button>				
 					
 				</div>			
 				

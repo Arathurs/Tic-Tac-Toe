@@ -24,9 +24,9 @@ export const GameHeading = props => {
 			
 	} else if(props.draw) {
 			
-		titleText = <TitleText message={constants.messages.draw} style={{textAlign: 'center'}}/>;
+		titleText = <TitleText message={constants.messages.drawHeadLine} style={{textAlign: 'center'}}/>;
 			
-	} else if (props.turn) {
+	} else if (props.turn && !props.winner) {
 			
 		if(props.symbol === constants.symbols.x ) {
 		

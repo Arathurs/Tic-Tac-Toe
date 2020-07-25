@@ -12,8 +12,10 @@ export const constants = {
 	messages: {
 		newGameAfterWin: ' won. Start a new game!',
 		startGame: 'Start a new game!',
-		draw: 'It\'s a Draw',
-		turn: ' Turn'
+		drawHeadLine: 'It\'s a Draw',
+		turn: ' Turn',
+		won: 'WON',
+		draw: 'DRAW'
 	},
 	statePropertyNames : {
 		draw: 'draw',
