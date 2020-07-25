@@ -56,7 +56,7 @@ export class TableRow extends React.Component {
 				const stateObject = Object.assign({}, obj, win);
 				obj = stateObject;
 				//console.log('after change: ',obj);
-			} else if (!win && this.props.emptyBlocks.length === 1) {
+			} else if (!win && this.props.emptyBlocks.length === 1 && this.props.player  === this.props.firstPlayer) {
 				
 				obj[constants.statePropertyNames.draw] = true;
 				obj[constants.statePropertyNames.turn] = null;

@@ -39,11 +39,11 @@ export class GameTable extends React.Component {
 						
 						<tbody>
 								
-							<TableRow data={this.props.one} arrName="rowOne" player={this.props.player} turn={this.props.turn} arrayEquals={this.props.arrayEquals} didIWin={this.props.didIWin} place={this.props.place} emptyBlocks={this.props.emptyBlocks} />
+							<TableRow data={this.props.one} arrName="rowOne" firstPlayer={this.props.firstPlayer} player={this.props.player} turn={this.props.turn} arrayEquals={this.props.arrayEquals} didIWin={this.props.didIWin} place={this.props.place} emptyBlocks={this.props.emptyBlocks} />
 							
-							<TableRow data={this.props.two} arrName="rowTwo" player={this.props.player} turn={this.props.turn} arrayEquals={this.props.arrayEquals} didIWin={this.props.didIWin} place={this.props.place} emptyBlocks={this.props.emptyBlocks} />
+							<TableRow data={this.props.two} arrName="rowTwo" firstPlayer={this.props.firstPlayer} player={this.props.player} turn={this.props.turn} arrayEquals={this.props.arrayEquals} didIWin={this.props.didIWin} place={this.props.place} emptyBlocks={this.props.emptyBlocks} />
 							
-							<TableRow data={this.props.three} arrName="rowThree" player={this.props.player} turn={this.props.turn} arrayEquals={this.props.arrayEquals} didIWin={this.props.didIWin} place={this.props.place} emptyBlocks={this.props.emptyBlocks} />
+							<TableRow data={this.props.three} arrName="rowThree" firstPlayer={this.props.firstPlayer} player={this.props.player} turn={this.props.turn} arrayEquals={this.props.arrayEquals} didIWin={this.props.didIWin} place={this.props.place} emptyBlocks={this.props.emptyBlocks} />
 							
 						</tbody>					
 						

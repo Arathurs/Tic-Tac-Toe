@@ -48,7 +48,7 @@ export class GameTableContainer extends React.Component {
 				
 				<OpacityContext.Provider value={0}>
 					
-					<GameTable winner={this.props.winner} clear={this.props.clearGame} restart={this.props.restart} turn={this.props.turn}  draw={this.props.draw} player={this.props.player} one={this.props.one} two={this.props.two} three={this.props.three} arrayEquals={this.props.arrayEquals} didIWin={this.props.didIWin} place={this.props.place} emptyBlocks={this.props.emptyBlocks}>
+					<GameTable winner={this.props.winner} firstPlayer={this.props.firstPlayer} clear={this.props.clearGame} restart={this.props.restart} turn={this.props.turn}  draw={this.props.draw} player={this.props.player} one={this.props.one} two={this.props.two} three={this.props.three} arrayEquals={this.props.arrayEquals} didIWin={this.props.didIWin} place={this.props.place} emptyBlocks={this.props.emptyBlocks}>
 							
 						<DisplayNotificationContainer winner={this.props.winner}>
 						
