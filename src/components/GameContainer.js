@@ -12,7 +12,7 @@ export class GameContainer extends React.Component {
 		super(props);				
 		
 		this.state = {			
-			playerTurn: 'Playe'r 1',
+			playerTurn: 'Player 1',
 			playerSymbol: 'X', 
 			rowOne: ["","",""],
 			rowTwo: ["","",""],
