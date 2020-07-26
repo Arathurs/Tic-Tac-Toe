@@ -15,14 +15,6 @@ export const constants = {
 		turn: ' Turn',
 		won: 'WON',
 		draw: 'DRAW'
-	},
-	statePropertyNames : {
-		draw: 'draw',
-		turn: 'turn',
-		gameResults: 'gameResults',
-		firstPlayer: 'firstPlayer',
-		player: 'player',
-		emptyPlaces: 'emptyPlaces'
 	}
 };
 			  
