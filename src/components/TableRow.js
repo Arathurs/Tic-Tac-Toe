@@ -1,5 +1,7 @@
 import React from 'react';
 import '../App.css';
+import { styles } from '../assets/styles';
+import { constants } from '../assets/constants';
 
 export class TableRow extends React.Component {	
 	constructor(props) {		
@@ -8,47 +10,69 @@ export class TableRow extends React.Component {
 		this.handleClick = this.handleClick.bind(this);	
 	}		
 	
-	arrayEquals(a,b) {
-		
-		return Array.isArray(a) && Array.isArray(b) && a.length === b.length && a.every((val, index) => val === b[index]);
-	}
-	
 	shouldComponentUpdate(nextProps) {
-		//console.log(this.arrayEquals(this.props.data,nextProps.data),'should');
-		//const notEqual = this.arrayEquals(this.props.data,nextProps.data);
-		//const notEqualTwo = !this.arrayEquals(this.props.data,nextProps.data);
-		//console.log(notEqualTwo);
-		return !this.arrayEquals(this.props.data,nextProps.data);
+		
+		return !this.props.arrayEquals(this.props.data,nextProps.data);
+		
 	}
 	
 	handleClick(e) {		
-		//document.getElementsByClassName(".recipe-name").innerHTML;		
+			
 		const string = e.target.textContent;				
 		
 		if(!string) {			
-			console.log('got here');			
+			
 			const indexInArr = e.target.dataset.index,
-				arrName = this.props.arrName,		    
-			    temp = this.props.data.slice(),
-				obj = {
-					playerTurn: this.props.player === 'Player 1' ? 'Computer' : 'Player 1',
-					playerSymbol: this.props.symbol === 'X' ? 'O' : 'X'
-				};
-			if(!this.props.game) {
-				const game = 'game';
-				obj[game] = true;
+				temp = this.props.data.slice(),
+				row = this.props.arrName;
+			let	obj = {},
+				player;
+			
+			if (!this.props.gameResults && !this.props.turn) {
+				player = constants.symbols.x;
+				obj.firstPlayer = constants.players.human;
+				obj.player = constants.symbols.o;
+				obj.turn = constants.players.computer;
+			
+			} else if (!this.props.gameResults && this.props.turn) {
+				player = this.props.player;
+				obj.player = this.props.player === constants.symbols.x ? constants.symbols.o : constants.symbols.x;
+				obj.turn = constants.players.computer;	
+				
 			}
-			temp[indexInArr] = this.props.symbol;	
-			obj[arrName] = temp;
-			console.log(temp);			
+			
+			temp[indexInArr] = player;	
+			obj[row] = temp.slice();
+			
+			
+			const win = this.props.didIWin(player, obj[row], row);
+	        if(win) {
+				
+				const stateObject = Object.assign({}, obj, win);
+				obj = stateObject;
+				
+			} else if (this.props.emptyBlocks.length === 1 && constants.players.human  === this.props.firstPlayer) {
+				console.log('human draws');
+				obj.gameResults = constants.symbols.xo;
+				
+			}
+			
+			console.log(obj,this.props,this.props.emptyBlocks.length,constants.players.human,this.props.firstPlayer);
 			this.props.place(obj);
 		}	
 	}		
 	
 	render() {	
-		
-		const dataPoints = this.props.data.map((point, i) => <td key={"data_"+i} data-index={i} onClick={this.handleClick} >{ point }</td>);
+	
+		const dataPoints = this.props.data.map((data, i) => {
+			
+			return data === constants.symbols.x ? <td style={{color: styles.colors.black}} key={"data_"+i} data-index={i} onClick={this.handleClick} >{data}</td> :
+				   data === constants.symbols.o ? <td style={{color: styles.colors.eggShell}} key={"data_"+i} data-index={i} onClick={this.handleClick} >{data}</td> :
+				   <td key={"data_"+i} data-index={i} onClick={this.handleClick} >{data}</td>;
+				
+		});
 		
 		return <tr>{dataPoints}</tr>;	
+	
 	}
 }

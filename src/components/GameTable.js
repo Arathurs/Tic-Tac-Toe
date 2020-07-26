@@ -1,39 +1,64 @@
 import React from 'react';
+import { OpacityContext } from '../assets/styles';
+import { constants } from '../assets/constants';
+import { ChooseXOButton } from './ChooseXOButton';
+import { GameHeading } from './GameHeading';
 import { TableRow } from './TableRow';
 
+
 export class GameTable extends React.Component {	
-	
+
 	render () {				
 	
-		let titleText;				
-		if (!this.props.game) {
+		return (
 			
-			titleText = 'Start a new game';
+			<div className="container">
 		
-		} else {
+				<div className="button-container">
+				
+					<ChooseXOButton playerChoice={constants.symbols.x} restart={this.props.restart} />
+						
+					<ChooseXOButton playerChoice={constants.symbols.o} restart={this.props.restart} />
 			
-			titleText = `Its your turn ${this.props.player}. Place an ${this.props.symbol} in a open box!`;					
-		
-		}				
-		return (			
-			<>				
+				</div>
+					
 				<div className="heading-container" >
-					<h1 style={{textAlign: 'center'}}>{ titleText }</h1>
+			
+					<GameHeading turn={this.props.turn} player={this.props.player} gameResults={this.props.gameResults}/>
+					
 				</div>				
+					
 				<div className="game-container">
-					<svg xmlns="http://www.w3.org/2000/svg" className="scv-position scv-background" style={{ width: 216}} jsname="hSNbuf"><path className="background-path" d="M 108 83 L 6 83" jsname="V3UtZb" /><path className="background-path" d="M 108 153 L 6 153" jsname="V3UtZb" /><path className="background-path" d="M 108 83 L 210 83" jsname="V3UtZb" /><path className="background-path" d="M 108 153 L 210 153" jsname="V3UtZb" /><path className="background-path" d="M 73 118 L 73 16" jsname="V3UtZb" /><path className="background-path" d="M 143 118 L 143 16" jsname="V3UtZb" /><path className="background-path" d="M 73 118 L 73 220" jsname="V3UtZb" /><path className="background-path" d="M 143 118 L 143 220" jsname="V3UtZb" /></svg>
-					<table className="tic-tac-toe-table" >
+			
+					<svg xmlns="http://www.w3.org/2000/svg" className="scv-position scv-background" style={{ width: 216, opacity: this.context}} jsname="hSNbuf"><path className="background-path" d="M 108 83 L 6 83" jsname="V3UtZb" /><path className="background-path" d="M 108 153 L 6 153" jsname="V3UtZb" /><path className="background-path" d="M 108 83 L 210 83" jsname="V3UtZb" /><path className="background-path" d="M 108 153 L 210 153" jsname="V3UtZb" /><path className="background-path" d="M 73 118 L 73 16" jsname="V3UtZb" /><path className="background-path" d="M 143 118 L 143 16" jsname="V3UtZb" /><path className="background-path" d="M 73 118 L 73 220" jsname="V3UtZb" /><path className="background-path" d="M 143 118 L 143 220" jsname="V3UtZb" /></svg>
+					
+					<table className="tic-tac-toe-table" style={{opacity: this.context}}>
+						
 						<tbody>
-							<TableRow data={this.props.one} arrName="rowOne" player={this.props.player} symbol={this.props.symbol} game={this.props.game} place={this.props.place} />
-							<TableRow data={this.props.two} arrName="rowTwo" player={this.props.player} symbol={this.props.symbol} game={this.props.game} place={this.props.place} />
-							<TableRow data={this.props.three} arrName="rowThree" player={this.props.player} symbol={this.props.symbol} game={this.props.game} place={this.props.place} />
+								
+							<TableRow data={this.props.one} arrName="rowOne" firstPlayer={this.props.firstPlayer} player={this.props.player} turn={this.props.turn} arrayEquals={this.props.arrayEquals} didIWin={this.props.didIWin} place={this.props.place} emptyBlocks={this.props.emptyBlocks} />
+							
+							<TableRow data={this.props.two} arrName="rowTwo" firstPlayer={this.props.firstPlayer} player={this.props.player} turn={this.props.turn} arrayEquals={this.props.arrayEquals} didIWin={this.props.didIWin} place={this.props.place} emptyBlocks={this.props.emptyBlocks} />
+							
+							<TableRow data={this.props.three} arrName="rowThree" firstPlayer={this.props.firstPlayer} player={this.props.player} turn={this.props.turn} arrayEquals={this.props.arrayEquals} didIWin={this.props.didIWin} place={this.props.place} emptyBlocks={this.props.emptyBlocks} />
+							
 						</tbody>					
+						
 					</table>				
+					{!this.props.render ? '' : this.props.render(this.props.gameResults)}
 				</div>				
+					
 				<div className="restart">
-					<button onClick={this.props.start} style={{padding: 'auto'}} >Restart Game</button>				
+						
+					<button onClick={this.props.clear} style={{padding: 'auto'}} >Restart Game</button>				
+					
 				</div>			
-			</>		
-		);	
+				
+			</div>	
+		
+		);
+			
 	}	
 }
+
+GameTable.contextType = OpacityContext;

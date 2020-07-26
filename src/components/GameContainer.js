@@ -1,126 +1,241 @@
 import React from 'react';
-import { GameTable } from './GameTable';
+import { constants } from '../assets/constants';
+import { GameTableContainer } from './GameTableContainer';
 
-const style = {
-	color: {
-		white: '#FFFFFF';
-		black: '#000000';
-	}
-};
 export class GameContainer extends React.Component {	
 	constructor(props) {		
 		super(props);				
 		
-		this.state = {			
-			playerTurn: 'Player 1',
-			playerSymbol: 'X', 
+		this.state = {			 
+			firstPlayer: '',
+			player: '',
+			turn: null,
 			rowOne: ["","",""],
 			rowTwo: ["","",""],
-			rowThree: ["","",""],			
-			game: false	
+			rowThree: ["","",""],
+			emptyPlaces: [],
+			gameResults: ''
 		};				
 		
-		this.startGame = this.startGame.bind(this);		
+		this.clearGame = this.clearGame.bind(this);
+		this.restartGame = this.restartGame.bind(this);		
 		this.placeSymbol = this.placeSymbol.bind(this);	
-		this.findEmptyPlaces = this.findEmptyPlaces.bind(this);
+		this.findEmptyPositions = this.findEmptyPositions.bind(this);
+		this.computerTakesTurn = this.computerTakesTurn.bind(this);
+		this.isThereAWinner = this.isThereAWinner.bind(this); 
+
 	}
 	
-	arrayHasRoom(arrIndex, arr, empty) {
+	arrayHasRoom(arrIndex, arr, emptyPlaces) {
+		
 		for(let i = 0; i < arr.length; i++) {
-			if(arr[i] === "") {
-				empty.push(arrIndex+i);
+			if(arr[i] === '') {
+				emptyPlaces.push(arrIndex+i);
 			}
 		}
-		
-		/*if(!arr.length) {
-			emptyPlaces = null;
-		}*/
-		
-		//return emptyPlaces;
 	}
 	
-	findEmptyPlaces(arr, arr2, arr3) {
-		let emptyPlaces = []
-		
+	findEmptyPositions(arr, arr2, arr3) {
+		let emptyPlaces = [];
 		this.arrayHasRoom('0', arr, emptyPlaces);
 		this.arrayHasRoom('1', arr2, emptyPlaces);
 		this.arrayHasRoom('2', arr3, emptyPlaces);
-		console.log(emptyPlaces);
-		return emptyPlaces;
+		
+		return emptyPlaces.slice();
 	}
 	
 	findRow(str) {
-		return str[0] === '0' ? 'rowOne'
-			 : str[0] === '1' ? 'rowTwo'
-			 : 'rowThree';
+		return str === '0' ? 'rowOne'
+			 : str === '1' ? 'rowTwo'
+             : 'rowThree';
 	}
 	
-	componentDidUpdate(prevState) {
+	arrayEquals(a,b) {
 		
-		if(this.state.playerTurn === 'Computer') {
+		return Array.isArray(a) && Array.isArray(b) && a.length === b.length && a.every((val, index) => val === b[index]);
+	}
+	
+	isThereAWinner(player, row, rowName) {
+		let row1, row2, row3;
+		row = row.slice();
+		
+		if(rowName === 'rowOne') {
+			row1 = row;
+			row2 = this.state.rowTwo.slice();
+			row3 = this.state.rowThree.slice();
+		} else if(rowName === 'rowTwo') {
+			row1 = this.state.rowOne.slice();
+			row2 = row;
+			row3 = this.state.rowThree.slice();
+		}  else {
+			row1 = this.state.rowOne.slice();
+			row2 = this.state.rowTwo.slice();
+			row3 = row;
+		}
+		
+		const control = [player, player, player],
+		      arr4 = [row1[0], row2[0], row3[0]],
+		      arr5 = [row1[1], row2[1], row3[1]],
+		      arr6 = [row1[2], row2[2], row3[2]],
+		      arr7 = [row1[0], row2[1], row3[2]],
+		      arr8 = [row3[0], row2[1], row1[2]],
+		      isArr1Equal = this.arrayEquals(control, row1.slice()),
+	          isArr2Equal = this.arrayEquals(control, row2.slice()),
+		      isArr3Equal = this.arrayEquals(control, row3.slice()),
+		      isArr4Equal = this.arrayEquals(control, arr4.slice()),
+              isArr5Equal = this.arrayEquals(control, arr5.slice()),
+		      isArr6Equal = this.arrayEquals(control, arr6.slice()),
+		      isArr7Equal = this.arrayEquals(control, arr7.slice()),
+		      isArr8Equal = this.arrayEquals(control, arr8.slice());
+		//const arrDisplayStr = `control: ${control} row1: ${row1} row2: ${row2} row3: ${row3} arr4: ${arr4} arr5: ${arr5} arr6: ${arr6} arr7: ${arr7} arr8: ${arr8}`;
+		//console.log(control, row1, row2, row3, arr4, arr5, arr6, arr7, arr8, isArr1Equal, isArr2Equal, isArr3Equal,	isArr4Equal, isArr5Equal, isArr6Equal, isArr7Equal, isArr8Equal);
+		
+		//console.log(arrDisplayStr);
+		
+		if(isArr1Equal ||
+		   isArr2Equal ||
+		   isArr3Equal ||
+		   isArr4Equal ||
+		   isArr5Equal ||
+		   isArr6Equal ||
+		   isArr7Equal ||
+		   isArr8Equal ) {
 			
-			const places = this.findEmptyPlaces(this.state.rowOne, this.state.rowTwo, this.state.rowThree);
-			console.log('component update', places);
-			const index = Math.floor(Math.random() * places.length);
-			const selection = places[index];
-			const row = this.findRow(selection),
-				arrIndex = parseInt(selection[1]);
-			let obj = {
-				playerTurn: this.state.playerTurn === 'Computer' ? 'Player 1' : 'Computer',
-				playerSymbol: this.state.playerSymbol === 'O' ? 'X' : 'O'
+			const obj = {
+				gameResults: player
 			};
-			const temp = this.state[row].slice();
-			temp[arrIndex] = this.state.playerSymbol;
-			console.log('temp', arrIndex, this.state.playerSymbol, temp);
-			obj[row] = temp;
-			this.setState(obj);
-			console.log('component update 2',selection,row, obj);
+				
+			return obj;
 			
+		} else {
+			
+			return false;
+				
 		}
+					
 	}
-	/*placeRandomSymbol() {
-		const arr1 = this.arrayHasRoom(this.state.rowOne),
-		      arr2 = this.arrayHasRoom(this.state.rowTwo),
-		      arr3 = this.arrayHasRoom(this.state.rowTwo);
-		let rowsWithBlanks = [];  
-		if (arr1) {
+	
+	computerTakesTurn() {
 		
-			rowsWithBlanks.push('rowOne');
+		const places = this.findEmptyPositions(this.state.rowOne, this.state.rowTwo, this.state.rowThree),
+		      index = Math.floor(Math.random() * places.length),
+		      item = places[index],
+			  row = this.findRow(item[0]),
+			  arrIndex = parseInt(item[1]),
+		      temp = this.state[row].slice();
+		let obj = {
+				player: this.state.player === constants.symbols.o ? constants.symbols.x : constants.symbols.o,
+				turn: this.state.turn === constants.players.computer ? constants.players.human : constants.players.computer		
+		};
+		places.splice(index, 1);
+		obj.emptyPlaces = places;
+		temp[arrIndex] = this.state.player;
+		obj[row] = temp;
 		
-		} else if(arr2) {
+		const win = this.isThereAWinner(this.state.player, obj[row], row);
+		if(win) {
 			
-			rowsWithBlanks.push('rowTwo');
-		
-		} else if(arr3) {
+			let stateObject = Object.assign({}, obj, win);
+			obj = stateObject;
 			
-			rowsWithBlanks.push('rowTwo');
+		} else if (!places.length && constants.players.computer === this.state.firstPlayer) {
+			
+			obj.gameResults = constants.symbols.xo;
 			
 		}
-		const availableRows = rowsWithBlanks.length;
-		const index = Math.floor(Math.random()* availableRows);
-		const row = rowsWithBlanks
 		
-	}*/
+		
+		setTimeout(() => {
+			
+			this.setState(obj);
+			
+		}, 1500);
+	}
 	
-	startGame() {		
+	componentDidUpdate(prevProps, prevState) {
+		
+		if (!this.state.gameResults && this.state.turn === constants.players.computer) {
+
+			this.computerTakesTurn();
+			
+		} else if (this.state.gameResults) {
+			
+			setTimeout(() => {
+			
+				this.setState({
+				
+					turn: null
+				
+				});
+			
+			}, 1500);
+			
+		}
+		
+	}
+	
+	componentWillUnmount() {
+		
+		this.setState = {			
+			firstPlayer: '',
+			player: '',
+			turn: null,
+			rowOne: ["","",""],
+			rowTwo: ["","",""],
+			rowThree: ["","",""],
+			emptyPlaces: [],
+			gameResults: ''
+		};	
+	}
+	
+	clearGame() {
+		
 		this.setState({	
-			game: true	
-		});	
-	}		
+			firstPlayer: '',
+			player: '',
+			turn: null, 
+			rowOne: ["","",""],
+			rowTwo: ["","",""],
+			rowThree: ["","",""],
+			emptyPlaces: [],
+		    gameResults: ''
+		});
+		
+	}
+	
+	restartGame(playerChoice) {
+	
+		const player = playerChoice || constants.symbols.x,
+		      firstPlayer = player === constants.symbols.x ? constants.players.human : constants.players.computer;
+		
+		this.clearGame();
+		this.setState({	
+			firstPlayer: firstPlayer,
+			player: player,
+			turn: firstPlayer
+		});
+		
+	}
 	
 	placeSymbol(stateObject) {		
-		//const obj = {};		
-		//obj[position] = arr;		
-		console.log('inside symbol',stateObject);		
-		this.setState(stateObject);	
+		
+		if(stateObject.gameResults) {
+			
+			this.setState(stateObject); 
+			
+		} else {
+			
+			this.setState(stateObject);	
+			
+		}
+		
+		
+	
 	}			
 	
 	render () {		
 		
-		let stringify = JSON.stringify(this.state);		
-		console.log(stringify,'rendering');		
-		
-		return <GameTable player={this.state.playerTurn} symbol={this.state.playerSymbol} one={this.state.rowOne} two={this.state.rowTwo} three={this.state.rowThree} game={this.state.game} start={this.startGame} place={this.placeSymbol}/>;
+		return <GameTableContainer firstPlayer={this.state.firstPlayer} player={this.state.player} one={this.state.rowOne} two={this.state.rowTwo} three={this.state.rowThree} gameResults={this.state.gameResults} turn={this.state.turn} arrayEquals={this.arrayEquals} didIWin={this.isThereAWinner} restart={this.restartGame} clearGame={this.clearGame} place={this.placeSymbol} emptyBlocks={this.state.emptyPlaces}/>;
 		
 	}	
 }
