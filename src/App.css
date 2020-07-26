@@ -1,6 +1,18 @@
-.body {
-	font-size: 12px;
+body {
+	font-size: 14px;
+	font-family: 'Roboto',arial,sans-serif;
 }
+div {
+	display: block;
+}
+.container {
+	line-height: 1.2;
+    text-align: left;
+    width: 600px;
+	margin: 0 auto;
+	position: relative;
+}
+
 .game-container {
 	background-color: #14bdac;
 	padding: 10px 0;
@@ -35,12 +47,44 @@
 	right: 0px;	
 	z-index: 0;
 }
-.scv-position {	
+.scv-position,
+.background-position {	
 	height: 100%;	
 	left: 0px;	
 	position: absolute;	
 	top: 0px;	
 	width: 100%;
+}
+.notification-background {
+	font-size: 34px;
+    font-weight: bold;
+	cursor: pointer;
+	text-align: center;
+    text-transform: uppercase;
+}
+
+.container .display-notification {
+	display: inline-block;
+    line-height: 1.5;
+    vertical-align: middle;
+}
+.container .notification-container {
+	width: 192px;
+    height: 192px;
+}
+.notification-container span{
+	
+	transition: height .4s cubic-bezier(0.5,0.5,0.5,1.5);
+    -webkit-transition: height .4s cubic-bezier(0.5,0.5,0.5,1.5);
+    vertical-align: middle;
+}
+.notification-container span{
+	
+}
+.text-transition,
+.notification-background {
+	transition: opacity .5s cubic-bezier(0.4,0.0,1,1),transform .5s cubic-bezier(0.4,0.0,1,1),visibility .5s step-end;
+    -webkit-transition: opacity .5s cubic-bezier(0.4,0.0,1,1),transform .5s cubic-bezier(0.4,0.0,1,1),visibility .5s step-end;
 }
 .tic-tac-toe-table {	
 	border-spacing: 6px;	
