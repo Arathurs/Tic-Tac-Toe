@@ -3,7 +3,7 @@ import React from 'react';
 //import { constants } from '../assets/constants';
 
 export const TitleText = props => {
-	
-	return <h1 style={{textAlign: 'center'}}>{props.children}{props.message}</h1>;
+	//console.log(props.player,JSON.stringify(props));
+	return <h1 style={{textAlign: 'center'}}>{!props.render ? '' : props.render(props.player)}{props.message}</h1>;
 			
 };

@@ -30,13 +30,13 @@ export class TableRow extends React.Component {
 				row = this.props.arrName;
 			let	obj = {},
 				player;
-			if (!this.props.draw && !this.props.winner && !this.props.turn) {
+			if (!this.props.gameResults && !this.props.turn) {
 				player = constants.symbols.x;
 				obj[constants.statePropertyNames.firstPlayer] = constants.players.human;
 				obj[constants.statePropertyNames.player] = constants.symbols.o;
 				obj[constants.statePropertyNames.turn] = constants.players.computer;
 			
-			} else if (!this.props.draw && !this.props.winner && this.props.turn) {
+			} else if (!this.props.gameResults && this.props.turn) {
 				player = this.props.player;
 				obj[constants.statePropertyNames.player] = this.props.player === constants.symbols.x ? constants.symbols.o : constants.symbols.x;
 				obj[constants.statePropertyNames.turn] = constants.players.computer;	
@@ -52,14 +52,14 @@ export class TableRow extends React.Component {
 			const win = this.props.didIWin(player, obj[row], row);
 		
 			if(win) {
+				//console.log('inside win');
 				//console.log('before change: ',obj);
 				const stateObject = Object.assign({}, obj, win);
 				obj = stateObject;
 				//console.log('after change: ',obj);
-			} else if (!win && this.props.emptyBlocks.length === 1 && this.props.player  === this.props.firstPlayer) {
-				
-				obj[constants.statePropertyNames.draw] = true;
-				obj[constants.statePropertyNames.turn] = null;
+			} else if (this.props.emptyBlocks.length === 1 && constants.players.human  === this.props.firstPlayer) {
+				//console.log('inside !win');
+				obj[constants.statePropertyNames.gameResults] = constants.symbols.xo;
 				
 			}
 		
@@ -70,7 +70,16 @@ export class TableRow extends React.Component {
 	render() {	
 		//console.log('table row is rendering',JSON.stringify(this.props));
 		const dataPoints = this.props.data.map((data, i) => {
-			if(data === constants.symbols.x) {
+			
+			
+				
+				return data === constants.symbols.x ? <td style={{color: styles.colors.black}} key={"data_"+i} data-index={i} onClick={this.handleClick} >{data}</td> :
+				       data === constants.symbols.o ? <td style={{color: styles.colors.eggShell}} key={"data_"+i} data-index={i} onClick={this.handleClick} >{data}</td>   :
+				       <td key={"data_"+i} data-index={i} onClick={this.handleClick} >{data}</td>;
+				
+				
+			
+			/*if(data === constants.symbols.x) {
 				
 				return <td style={{color: styles.colors.black}} key={"data_"+i} data-index={i} onClick={this.handleClick} >{data}</td>;
 			
@@ -82,7 +91,7 @@ export class TableRow extends React.Component {
 			
 				return <td key={"data_"+i} data-index={i} onClick={this.handleClick} >{data}</td>;
 			
-			}	
+			}	*/
 		});
 		
 		return <tr>{dataPoints}</tr>;	

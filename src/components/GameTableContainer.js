@@ -2,43 +2,35 @@ import React from 'react';
 import { styles, OpacityContext } from '../assets/styles';
 import { constants } from '../assets/constants';
 import { GameTable } from './GameTable';
-import { DisplayNotificationContainer } from './DisplayNotificationContainer';
-import { GameOver } from './WinMessage';
+//import { DisplayNotificationContainer } from './DisplayNotificationContainer';
+import { GameOverContainer } from './GameOverContainer';
 
 export class GameTableContainer extends React.Component {	
 	
 	render () {				
-		
-		//console.log('if there is neither a draw or winner', this.props.draw, this.props.winner, this.props.winnerSymbol, (!this.props.draw || !this.props.winner));
-		if(this.props.turn || (!this.props.turn && !this.props.draw && !this.props.winner)){
-			//console.log('if there is neither a draw or winner', this.props.turn, !this.props.draw, !this.props.winner, (!this.props.draw || !this.props.winner));
+		//console.log(JSON.stringify(this.props));
+		//console.log('if there is neither a draw or winner', this.props.gameResults);
+		if(this.props.turn || (!this.props.turn && !this.props.gameResults)){
+			//console.log('if there is neither a draw or winner', this.props.turn, !this.gameResults);
 			return  (
 				
-				<GameTable winner={this.props.winner} clear={this.props.clearGame} restart={this.props.restart} turn={this.props.turn}  draw={this.props.draw} player={this.props.player} one={this.props.one} two={this.props.two} three={this.props.three} arrayEquals={this.props.arrayEquals} didIWin={this.props.didIWin} place={this.props.place} emptyBlocks={this.props.emptyBlocks}/>
+				<GameTable gameResults={this.props.gameResults} clear={this.props.clearGame} restart={this.props.restart} turn={this.props.turn} player={this.props.player} one={this.props.one} two={this.props.two} three={this.props.three} arrayEquals={this.props.arrayEquals} didIWin={this.props.didIWin} place={this.props.place} emptyBlocks={this.props.emptyBlocks}/>
 				
 			);
 			
-		} else if(this.props.winner) {
+		} else if(this.props.gameResults) {
 			//console.log('if X is the winner', this.props.winner);
 			return (
 
 				<OpacityContext.Provider value={0}>
 					
-					<GameTable render={winner => (<GameOver winner={winner}>)} winner={this.props.winner} clear={this.props.clearGame} restart={this.props.restart} turn={this.props.turn}  draw={this.props.draw} player={this.props.player} one={this.props.one} two={this.props.two} three={this.props.three} arrayEquals={this.props.arrayEquals} didIWin={this.props.didIWin} place={this.props.place} emptyBlocks={this.props.emptyBlocks}>
-							
-						<DisplayNotificationContainer winner={this.props.winner}>
-						
-							<WinMessage message={constants.messages.won} render={this.props.winner} />
-					
-						</DisplayNotificationContainer>			
-							
-					</GameTable>
+					<GameTable render={winner => <GameOverContainer winner={winner} gameResults={this.props.gameResults} />} gameResults={this.props.gameResults} clear={this.props.clearGame} restart={this.props.restart} turn={this.props.turn}  player={this.props.player} one={this.props.one} two={this.props.two} three={this.props.three} arrayEquals={this.props.arrayEquals} didIWin={this.props.didIWin} place={this.props.place} emptyBlocks={this.props.emptyBlocks} />
 				
 				</OpacityContext.Provider>
 				
 			);
 		
-		} else if(this.props.winner === constants.symbols.o) {
+		} /*else if(this.props.winner === constants.symbols.o) {
 			//console.log('if O is the winner', this.props.winner);
 			return (
 				
@@ -84,6 +76,6 @@ export class GameTableContainer extends React.Component {
 				
 			);
 			
-		}
+		}*/
 	}	
 }

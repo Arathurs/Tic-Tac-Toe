@@ -2,10 +2,6 @@ import React from 'react';
 import { constants } from '../assets/constants';
 import { GameTableContainer } from './GameTableContainer';
 
-//simplify state and other variables
-//replace playerSymbol with player
-//replace game and victory with winner
-///replace winnerName and winnerSymbol with winner
 export class GameContainer extends React.Component {	
 	constructor(props) {		
 		super(props);				
@@ -18,8 +14,7 @@ export class GameContainer extends React.Component {
 			rowTwo: ["","",""],
 			rowThree: ["","",""],
 			emptyPlaces: [],
-			draw: false,
-			winner: ''
+			gameResults: ''
 		};				
 		
 		this.clearGame = this.clearGame.bind(this);
@@ -89,16 +84,18 @@ export class GameContainer extends React.Component {
 	isThereAWinner(player, row, rowName) {
 		//console.log('isthereawinner',player,row,rowName);
 		//let missingRows = this.findAndSortMissingRows(rowName);
-		//console.log(player, row, rowName, missingRows);
-		
+		console.log(player, row, rowName);
+		let names = ['rowOne','rowTwo','rowThree'];
+		let sortedNames = names.sort();
+		console.log(player, row, rowName, names, sortedNames);
 		let row1, row2, row3;
 		row = row.slice();
 		
 		if(rowName === 'rowOne') {
 			
 			row1 = row;
-			row2 = this.state.rowThree.slice();
-			row3 = this.state.rowTwo.slice();
+			row2 = this.state.rowTwo.slice();
+			row3 = this.state.rowThree.slice();
 			
 		} else if(rowName === 'rowTwo') {
 			
@@ -129,8 +126,11 @@ export class GameContainer extends React.Component {
 		const isArr6Equal = this.arrayEquals(control, arr6.slice());
 		const isArr7Equal = this.arrayEquals(control, arr7.slice());
 		const isArr8Equal = this.arrayEquals(control, arr8.slice());
+		const arrDisplayStr = `control: ${control} row1: ${row1} row2: ${row2} row3: ${row3} arr4: ${arr4} arr5: ${arr5} arr6: ${arr6} arr7: ${arr7} arr8: ${arr8}`;
 		//console.log(control, row1, row2, row3, arr4, arr5, arr6, arr7, arr8, isArr1Equal, isArr2Equal, isArr3Equal,	isArr4Equal, isArr5Equal, isArr6Equal, isArr7Equal, isArr8Equal);
-			
+		
+		console.log(arrDisplayStr);
+		
 		if( isArr1Equal ||
 		    isArr2Equal ||
 		    isArr3Equal ||
@@ -143,12 +143,12 @@ export class GameContainer extends React.Component {
 			//console.log('isThereAWinner someone satisfied the if conditions');
 			const obj = {
 					
-					winner: player
+					gameResults: player
 					
 			};
-			
+			console.log('winner here is resulting object',obj);
 			return obj;
-		
+			
 		} else {
 			
 			//console.log('isThereAWinner someone did not satisfy the if conditions')
@@ -169,7 +169,7 @@ export class GameContainer extends React.Component {
 		/*if(!places.length) {
 			
 			this.setState({
-				draw: true,
+				gameResults: true,
 				turn : null
 			});
 		
@@ -202,10 +202,10 @@ export class GameContainer extends React.Component {
 			const stateObject = Object.assign({}, obj, win);
 			obj = stateObject;
 			//console.log('after change: ',obj);
-		} else if (!win && !places) {
+		} else if (!places.length && constants.players.computer === this.state.firstPlayer) {
 			//console.log('this computer made the last move resulting in a draw')	;
-			obj[constants.statePropertyNames.draw]= true;
-			obj[constants.statePropertyNames.turn]= null;
+			obj[constants.statePropertyNames.gameResults]= constants.symbols.xo;
+			//obj[constants.statePropertyNames.turn]= null;
 			
 		}
 		
@@ -221,13 +221,13 @@ export class GameContainer extends React.Component {
 	
 	componentDidUpdate(prevProps, prevState) {
 		
-		//console.log('inside component did update',this.state.winner,this.state.draw, this.state.emptyPlaces.length);
-		if (!this.state.winner && !this.state.draw && this.state.turn === constants.players.computer) {
+		//console.log('inside component did update',this.state.gameResults, this.state.emptyPlaces.length);
+		if (!this.state.gameResults && this.state.turn === constants.players.computer) {
 
 			//console.log('inside component did update first if');
 			this.computerTakesTurn();
 			
-		} else if (this.state.winner) {
+		} else if (this.state.gameResults) {
 			
 			setTimeout(() => {
 			
@@ -237,9 +237,15 @@ export class GameContainer extends React.Component {
 				
 				});
 			
-			}, 2000);
+			}, 1500);
 			
-		}
+			
+		}/* else if ((this.state.emptyPlaces.length === 1 && this.state.firstPlayer === constants.players.human) ||
+					(!this.state.emptyPlaces.length && && this.state.firstPlayer === constants.players.computer) {
+			
+			
+			
+		}*/
 		
 		
 	}
@@ -254,8 +260,7 @@ export class GameContainer extends React.Component {
 			rowTwo: ["","",""],
 			rowThree: ["","",""],
 			emptyPlaces: [],
-			draw: false,
-			winner: ''
+			gameResults: ''
 		};	
 	}*/
 	
@@ -269,8 +274,7 @@ export class GameContainer extends React.Component {
 			rowTwo: ["","",""],
 			rowThree: ["","",""],
 			emptyPlaces: [],
-			draw: false,
-			winner: ''
+		    gameResults: ''
 		});
 		
 	}
@@ -296,8 +300,8 @@ export class GameContainer extends React.Component {
 		
 		//const obj = {};		
 		//obj[position] = arr;		
-		//console.log('inside symbol',stateObject);
-		if(stateObject.winner) {
+		console.log('inside symbol',stateObject,this.state.emptyPlaces);
+		if(stateObject.gameResults) {
 			
 			//console.log('winner is true');
 			this.setState(stateObject); 
@@ -318,7 +322,7 @@ export class GameContainer extends React.Component {
 		//let stringify = JSON.stringify(this.state);		
 		//console.log(stringify,'rendering');		
 		
-		return <GameTableContainer firstPlayer={this.state.firstPlayer} player={this.state.player} one={this.state.rowOne} two={this.state.rowTwo} three={this.state.rowThree} draw={this.state.draw} winner={this.state.winner} turn={this.state.turn} arrayEquals={this.arrayEquals} didIWin={this.isThereAWinner} restart={this.restartGame} clearGame={this.clearGame} place={this.placeSymbol} emptyBlocks={this.state.emptyPlaces}/>;
+		return <GameTableContainer firstPlayer={this.state.firstPlayer} player={this.state.player} one={this.state.rowOne} two={this.state.rowTwo} three={this.state.rowThree} gameResults={this.state.gameResults} turn={this.state.turn} arrayEquals={this.arrayEquals} didIWin={this.isThereAWinner} restart={this.restartGame} clearGame={this.clearGame} place={this.placeSymbol} emptyBlocks={this.state.emptyPlaces}/>;
 		
 	}	
 }

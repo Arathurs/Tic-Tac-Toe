@@ -12,7 +12,7 @@ export class GameTable extends React.Component {
 		//console.log('context',this.props.value,this.context);
 		//const propString = JSON.stringify(this.props.value),
 		//  contextString = JSON.stringify(this.context);
-		// console.log(propString, contextString);
+		//console.log(JSON.stringify(this.props));
 		return (
 			
 			<div className="container">
@@ -27,7 +27,7 @@ export class GameTable extends React.Component {
 					
 				<div className="heading-container" >
 			
-					<GameHeading turn={this.props.turn} draw={this.props.draw} player={this.props.player} />
+					<GameHeading turn={this.props.turn} player={this.props.player} gameResults={this.props.gameResults}/>
 					
 				</div>				
 					
@@ -48,7 +48,7 @@ export class GameTable extends React.Component {
 						</tbody>					
 						
 					</table>				
-					{this.props.children}
+					{!this.props.render ? '' : this.props.render(this.props.gameResults)}
 				</div>				
 					
 				<div className="restart">

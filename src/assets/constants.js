@@ -21,6 +21,7 @@ export const constants = {
 	statePropertyNames : {
 		draw: 'draw',
 		turn: 'turn',
+		gameResults: 'gameResults',
 		firstPlayer: 'firstPlayer',
 		player: 'player'
 	}
