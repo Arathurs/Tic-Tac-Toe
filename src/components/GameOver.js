@@ -11,7 +11,7 @@ export const GameOver = props => {
 							
 					<div className="notification-container">
 				
-						<div style={props.styleObject} >{props.gameResults !== constants.symbols.xo ? props.gameResults : props.children}</div>
+						<div style={props.styleObj} >{props.gameResults !== constants.symbols.xo ? props.gameResults : props.children}</div>
 						
 						<div style={{color: '#000', opacity: 1}}>{props.message}</div>
 								

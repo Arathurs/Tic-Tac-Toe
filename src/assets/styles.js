@@ -15,5 +15,4 @@ export const styles = {
 	}
 };
 
-export const StylesContext = React.createContext(styles.colors.eggshell);
 export const OpacityContext = React.createContext(styles.opacity.one);

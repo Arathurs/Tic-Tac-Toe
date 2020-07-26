@@ -10,9 +10,10 @@ export class ChooseXOButton extends React.Component {
 	}
 	
 	chooseSymbol() {
-		//console.log(this.props.playerChoice);
+		
 		this.props.restart(this.props.playerChoice);
 	}
+	
 	render() {
 		
 		

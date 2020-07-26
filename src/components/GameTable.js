@@ -9,10 +9,7 @@ import { TableRow } from './TableRow';
 export class GameTable extends React.Component {	
 
 	render () {				
-		//console.log('context',this.props.value,this.context);
-		//const propString = JSON.stringify(this.props.value),
-		//  contextString = JSON.stringify(this.context);
-		//console.log(JSON.stringify(this.props));
+	
 		return (
 			
 			<div className="container">

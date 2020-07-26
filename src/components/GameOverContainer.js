@@ -20,7 +20,6 @@ export const GameOverContainer = props => {
 			
 			</>
 		);
-		console.log((props.gameResults === constants.symbols.x || props.gameResults === constants.symbols.o),message,JSON.stringify(props));
 	
 	return <GameOver gameResults={props.gameResults} color={color} styleObj={styleObject} message={message} children={children} />;
 	
