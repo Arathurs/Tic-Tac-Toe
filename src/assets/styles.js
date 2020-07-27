@@ -8,11 +8,7 @@ export const styles = {
 	},
 	font: {
 		fontWeight: 'bold'
-	},
-	opacity: {
-		zero: 0,
-		one: 1
 	}
 };
 
-export const OpacityContext = React.createContext(styles.opacity.one);
+export const OpacityContext = React.createContext(1);
