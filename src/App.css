@@ -5,6 +5,88 @@ body {
 div {
 	display: block;
 }
+button,
+input,
+optgroup,
+select,
+textarea {
+  margin: 0;
+  font: inherit;
+  color: inherit;
+}
+button {
+  overflow: visible;
+}
+button,
+select {
+  text-transform: none;
+}
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+.button, 
+.button:active, 
+.button:focus, 
+button, 
+button:active, 
+button:focus {
+    outline: none;
+}
+.button, 
+button {
+    height: 48px;
+    line-height: 48px;
+    background-color: #369ff4;
+    color: #fff;
+    -webkit-transition: background-color 150ms linear;
+    transition: background-color 150ms linear;
+    /*text-transform: uppercase;*/
+    letter-spacing: .1em;
+    border-radius: 4px;
+    border: none;
+    font-size: 13px;
+    padding: 0 20px;
+    font-weight: 500;
+    display: inline-block;
+}
+.btn, 
+.btn-simple-search, 
+.btn-md, 
+.btn-gray, 
+.btn-blue{
+	width: 150px;
+	display: inline-block;
+	margin-bottom: 0px;
+	font-weight: normal;
+	text-align: center;
+	vertical-align: middle;
+	touch-action: manipulation;
+	cursor: pointer;
+	background-image: none;
+	border: 1px solid transparent;
+	white-space: nowrap;
+	padding: 6px 12px;
+	font-size: 15px;
+	line-height: 1.4285;
+	border-radius: 4px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
 .container {
 	line-height: 1.2;
     text-align: left;
@@ -12,7 +94,10 @@ div {
 	margin: 0 auto;
 	position: relative;
 }
-
+.button-container {
+	margin: 0 auto;
+	display: block;
+}
 .game-container {
 	background-color: #14bdac;
 	padding: 10px 0;
@@ -103,14 +188,23 @@ div {
 	line-height: 48px;
 	
 }
-.restart {	
-	margin: 0;	
+.button-container {	
+	margin: 20px auto;
 	width: 100%;	
 	z-index: 1;	
 	text-align: center;
 }
-.restart button {	
+.button-container .btn {
+	margin:0 20px;
+	
+}
+.restart {	
+	margin: 20px auto;
+	width: 100%;
+	text-align: center;
+}
+.restart .btn {	
 	margin: 10px auto;	
 	padding: 10px 8px;	
-	background-color: transparent;
+	background-color: #d87002;
 }

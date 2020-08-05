@@ -3,10 +3,17 @@
 Simple tic-tac-toe web application game, created with React.
 
 
-## Fixes v3
-- Uses Context API to apply theme styles across components regardless of nesting structure.
-- Fixed bug which resulted in a small fraction of undeserved wins.
-- Refactored various components, implementing render props to significantly enhance reusability of components.
-- Added logic to allow a user to choose their symbol, and by so doing the order of moves. X always starts first, regardless of whether controlled by the computer or human.
-- Added logic which results in the software detecting a draw, which results when either player makes the last move which fills the tic-tac-toe container without a resulting win.
-- Added logic for game over events (either the human player's win, the computer, or a draw by either) to make the resulting animations more meaningful and appealing to the user.
+## Fixes v4
+- Improved the visual design of the app using CSS5.
+- Refactored code to enhance performance, efficiency and readability.
+- Refactored code to follow best practices in clearly separating containter elements from presentational elements.
+- Fixed tiny design and performance bug fixes in previous verson.
+
+
+##To Do
+
+- Make computer player smarter
+- Instead of making random moves have the computer survey the current tic-tac-toe board to decide an optimal move.
+- Implement a function that gives the computer player functionality to see and act on instant wins. For example, Computer player is 'O' and it's the Computer's turn. If there are any rows with at least two 'O's, the computer will find it and place an 'O' there to automatically win.
+- Implement a function that allows the computer to plan multiple moves ahead, at least 2-3.
+- Implement a feature that would allow the player to choose the difficulty of the game. Difficulty can be controlled by simulating human error by using Math.random() to give the computer specific odds of picking the optimal move. The harder the difficulty chosen, the more likely the computer is to not make "mistakes".

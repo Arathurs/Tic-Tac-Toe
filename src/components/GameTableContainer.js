@@ -2,22 +2,28 @@ import React from 'react';
 import { OpacityContext } from '../assets/styles';
 import { GameTable } from './GameTable';
 import { GameOverContainer } from './GameOverContainer';
+import { TableContainerErrorBoundary } from './errors/TableContainerErrorBoundary';
 
 export class GameTableContainer extends React.Component {	
 	
 	render () {				
-		
-		const opaqueContainer = (
-
-			<OpacityContext.Provider value={0}>
-					
-				<GameTable render={winner => <GameOverContainer winner={winner} gameResults={this.props.gameResults} />} firstPlayer={this.props.firstPlayer} gameResults={this.props.gameResults} clear={this.props.clearGame} restart={this.props.restart} turn={this.props.turn}  player={this.props.player} one={this.props.one} two={this.props.two} three={this.props.three} arrayEquals={this.props.arrayEquals} didIWin={this.props.didIWin} place={this.props.place} emptyBlocks={this.props.emptyBlocks} />
-			
-			</OpacityContext.Provider>
-				
+		//const propString = JSON.parse(JSON.stringify(this.props));
+		//console.log('game table container',propString,'player is:',this.props.rowOne);
+		let tableContainer;
+						
+		if (this.props.turn || (!this.props.turn && !this.props.gameResults)) {
+			tableContainer = <GameTable {...this.props} />;
+		} else if (this.props.gameResults) {
+			tableContainer = (
+				<OpacityContext.Provider value={0}>
+					<GameTable render={winner => <GameOverContainer winner={winner} gameResults={this.props.gameResults} />} {...this.props} />
+				</ OpacityContext.Provider>
+			);
+		}
+		return (
+			<TableContainerErrorBoundary>
+				{tableContainer}
+			</ TableContainerErrorBoundary>
 		);
-		
-		return (this.props.turn)|| (!this.props.turn && !this.props.gameResults) ? <GameTable firstPlayer={this.props.firstPlayer} gameResults={this.props.gameResults} clear={this.props.clearGame} restart={this.props.restart} turn={this.props.turn} player={this.props.player} one={this.props.one} two={this.props.two} three={this.props.three} arrayEquals={this.props.arrayEquals} didIWin={this.props.didIWin} place={this.props.place} emptyBlocks={this.props.emptyBlocks}/> : opaqueContainer;
-		
 	}	
 }

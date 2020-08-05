@@ -14,7 +14,7 @@ export class GameContainer extends React.Component {
 			rowThree: ["","",""],
 			emptyPlaces: [],
 			gameResults: ''
-		};
+		};				
 		this.clearGame = this.clearGame.bind(this);
 		this.restartGame = this.restartGame.bind(this);		
 		this.placeSymbol = this.placeSymbol.bind(this);	
@@ -93,8 +93,8 @@ export class GameContainer extends React.Component {
 			};
 			return obj;
 		} else {
-			return false;	
-		}		
+			return false;
+		}
 	}
 	
 	computerTakesTurn() {
@@ -179,7 +179,7 @@ export class GameContainer extends React.Component {
 		this.setState(stateObject);	
 	}			
 	
-	render () {
-		return <GameTableContainer {...this.state} arrayEquals={this.arrayEquals} didIWin={this.isThereAWinner} restart={this.restartGame} clearGame={this.clearGame} place={this.placeSymbol} />;
+	render () {		
+		return <GameTableContainer firstPlayer={this.state.firstPlayer} player={this.state.player} one={this.state.rowOne} two={this.state.rowTwo} three={this.state.rowThree} gameResults={this.state.gameResults} turn={this.state.turn} arrayEquals={this.arrayEquals} didIWin={this.isThereAWinner} restart={this.restartGame} clearGame={this.clearGame} place={this.placeSymbol} emptyBlocks={this.state.emptyPlaces}/>;
 	}	
 }

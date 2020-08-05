@@ -14,13 +14,14 @@ export class GameContainer extends React.Component {
 			rowThree: ["","",""],
 			emptyPlaces: [],
 			gameResults: ''
-		};
+		};				
 		this.clearGame = this.clearGame.bind(this);
 		this.restartGame = this.restartGame.bind(this);		
 		this.placeSymbol = this.placeSymbol.bind(this);	
 		this.findEmptyPositions = this.findEmptyPositions.bind(this);
 		this.computerTakesTurn = this.computerTakesTurn.bind(this);
 		this.isThereAWinner = this.isThereAWinner.bind(this); 
+
 	}
 	
 	arrayHasRoom(arrIndex, arr, emptyPlaces) {
@@ -52,6 +53,7 @@ export class GameContainer extends React.Component {
 	isThereAWinner(player, row, rowName) {
 		let row1, row2, row3;
 		row = row.slice();
+		
 		if(rowName === 'rowOne') {
 			row1 = row;
 			row2 = this.state.rowTwo.slice();
@@ -80,6 +82,11 @@ export class GameContainer extends React.Component {
 		      isArr6Equal = this.arrayEquals(control, arr6.slice()),
 		      isArr7Equal = this.arrayEquals(control, arr7.slice()),
 		      isArr8Equal = this.arrayEquals(control, arr8.slice());
+		//const arrDisplayStr = `control: ${control} row1: ${row1} row2: ${row2} row3: ${row3} arr4: ${arr4} arr5: ${arr5} arr6: ${arr6} arr7: ${arr7} arr8: ${arr8}`;
+		//console.log(control, row1, row2, row3, arr4, arr5, arr6, arr7, arr8, isArr1Equal, isArr2Equal, isArr3Equal,	isArr4Equal, isArr5Equal, isArr6Equal, isArr7Equal, isArr8Equal);
+		
+		//console.log(arrDisplayStr);
+		
 		if(isArr1Equal ||
 		   isArr2Equal ||
 		   isArr3Equal ||
@@ -92,9 +99,13 @@ export class GameContainer extends React.Component {
 				gameResults: player
 			};
 			return obj;
+			
 		} else {
-			return false;	
-		}		
+			
+			return false;
+				
+		}
+					
 	}
 	
 	computerTakesTurn() {
@@ -176,10 +187,15 @@ export class GameContainer extends React.Component {
 	}
 	
 	placeSymbol(stateObject) {		
+		/*if(stateObject.gameResults) {
+			this.setState(stateObject); 
+		} else {
+			this.setState(stateObject);	
+		}*/
 		this.setState(stateObject);	
 	}			
 	
-	render () {
-		return <GameTableContainer {...this.state} arrayEquals={this.arrayEquals} didIWin={this.isThereAWinner} restart={this.restartGame} clearGame={this.clearGame} place={this.placeSymbol} />;
+	render () {		
+		return <GameTableContainer firstPlayer={this.state.firstPlayer} player={this.state.player} one={this.state.rowOne} two={this.state.rowTwo} three={this.state.rowThree} gameResults={this.state.gameResults} turn={this.state.turn} arrayEquals={this.arrayEquals} didIWin={this.isThereAWinner} restart={this.restartGame} clearGame={this.clearGame} place={this.placeSymbol} emptyBlocks={this.state.emptyPlaces}/>;
 	}	
 }

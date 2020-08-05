@@ -1,1 +1,1 @@
-import React from 'react';import { GameContainer } from './components/GameContainer';function App() {  	return <GameContainer />;	}export default App;
+import React from 'react';import { AppErrorBoundary }  from './components/errors/AppErrorBoundary';import { GameContainer } from './components/GameContainer';function App() {  	return (		<AppErrorBoundary>			<GameContainer />		</ AppErrorBoundary>	);}export default App;
