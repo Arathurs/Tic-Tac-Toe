@@ -3,6 +3,10 @@
 ### Screenshot:
   ![Screenshot](public/img/homepage.png)
   
+  ![Screenshot](public/img/homepage1.png)
+  
+  ![Screenshot](public/img/homepage2.png)
+  
   ![Screenshot](public/img/homepage-white.png)
   
   ![Screenshot](public/img/homepage-betterer.png)
