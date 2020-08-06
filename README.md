@@ -11,13 +11,13 @@ Simple tic-tac-toe web application game, created with React.
 
 ### Rules of the Game
 
-##### ***X*** always goes first. A user may choose to be either ***X*** or ***O*** but whichever player is ***X*** will always go first.
-##### Users may choose either ***X*** or ***O*** by clicking either of the buttons on top displaying the appropriate symbol, which also results in starting the game.
-##### Clicking on an empty block automaticatically starts the game and sets the player as ***X***, because again, ***X*** is always first.
-##### The game will always display whose turn is next once the game starts.
-##### A winner is once a player fills a block which results in at least one vertical, horizontal, or diagonal row containing only their symbol.
-##### If there is no winner after a player fills the last block, the game results in a draw.
-##### Clicking on the ***Restart Game*** button below will reset the game and erase the playing board. To start another game, pick a symbol up top or fill a block on the board to immediately become ***X***.
+- ***X*** always goes first. A user may choose to be either ***X*** or ***O*** but whichever player is ***X*** will always go first.
+- Users may choose either ***X*** or ***O*** by clicking either of the buttons on top displaying the appropriate symbol, which also results in starting the game.
+- Clicking on an empty block automaticatically starts the game and sets the player as ***X***, because again, ***X*** is always first.
+- The game will always display whose turn is next once the game starts.
+- A winner is once a player fills a block which results in at least one vertical, horizontal, or diagonal row containing only their symbol.
+- If there is no winner after a player fills the last block, the game results in a draw.
+- Clicking on the ***Restart Game*** button below will reset the game and erase the playing board. To start another game, pick a symbol up top or fill a block on the board to immediately become ***X***.
 
 ### Fixes v4
 
