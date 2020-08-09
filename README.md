@@ -7,7 +7,7 @@
 
 ### About the Project
 
-Simple tic-tac-toe web application game, created with React.
+A tic-tac-toe web application game, created with React.
 
 ### Rules of the Game
 
@@ -33,5 +33,5 @@ Simple tic-tac-toe web application game, created with React.
 - Instead of making random moves have the computer survey the current tic-tac-toe board to decide an optimal move.
 - Implement a function that gives the computer player the cabapility to detect and act on instant wins. For example, Computer player is 'O' and it's the Computer's turn. If there are any rows with at least two 'O's, the computer should find it and place an 'O' there to automatically win.
 - Implement a function that allows the computer to plan several statistically optimal moves ahead, at least 2-3, depending on several factors.
-- Implement a feature that would allow the player to choose the difficulty of the game. Difficulty can be controlled by simulating human error by using Math.random() to give the computer specific odds of picking the optimal move. The harder the difficulty chosen, the more likely the computer is to not make "mistakes".
-- Refactor isThereAWinner(), which checks if the most recent move resulted in a win. Currently it is highly inefficient, utilizing a brute force method which checks all 8 rows for a possible win. It only needs to check the ***affected*** rows of a recent move, which at most can be four.
+- Implement a feature which would allow the player to choose the difficulty of the game. Difficulty can be controlled by simulating human error using `Math.random()`, manipulating the specific odds of the computer player making the optimal move depending on the chosen level. The harder the difficulty chosen, the more likely the computer is to not "make mistakes".
+- Refactor `isThereAWinner()`, which checks if the most recent move resulted in a win. Currently it is highly inefficient, utilizing a brute force method which checks all 8 rows for a possible win after every move. It only needs to check the ***affected*** rows of a recent move, which at most can be four.
