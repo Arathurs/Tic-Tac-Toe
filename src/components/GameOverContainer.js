@@ -4,7 +4,7 @@ import { styles } from '../assets/styles';
 import { GameOver } from './GameOver';
 
 export function GameOverContainer (props) {
-	const color = props.winner === constants.symbols.x ? styles.colors.black : styles.colors.eggShell,
+	const color = props.gameResults === constants.symbols.x ? styles.colors.black : styles.colors.eggShell,
 	      obj = {
 		    color: color,
 		    fontSize: 40

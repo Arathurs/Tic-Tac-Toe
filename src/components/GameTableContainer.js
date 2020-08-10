@@ -7,8 +7,6 @@ import { TableContainerErrorBoundary } from './errors/TableContainerErrorBoundar
 export class GameTableContainer extends React.Component {	
 	
 	render () {				
-		//const propString = JSON.parse(JSON.stringify(this.props));
-		//console.log('game table container',propString,'player is:',this.props.rowOne);
 		let tableContainer;
 						
 		if (this.props.turn || (!this.props.turn && !this.props.gameResults)) {
@@ -16,7 +14,7 @@ export class GameTableContainer extends React.Component {
 		} else if (this.props.gameResults) {
 			tableContainer = (
 				<OpacityContext.Provider value={0}>
-					<GameTable render={winner => <GameOverContainer winner={winner} gameResults={this.props.gameResults} />} {...this.props} />
+					<GameTable render={() => <GameOverContainer gameResults={this.props.gameResults} />} {...this.props} />
 				</ OpacityContext.Provider>
 			);
 		}

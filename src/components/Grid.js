@@ -15,7 +15,7 @@ export const Grid = props => (
 					<TableRow data={props.rowThree} arrName="rowThree" firstPlayer={props.firstPlayer} player={props.player} turn={props.turn} arrayEquals={props.arrayEquals} didIWin={props.didIWin} place={props.place} emptyPlaces={props.emptyPlaces} />
 				</tbody>					
 			</table>				
-			{!props.render ? '' : props.render(props.gameResults)}
+			{!props.render ? '' : props.render()}
 		</div>
 		)}
 	</OpacityContext.Consumer>
