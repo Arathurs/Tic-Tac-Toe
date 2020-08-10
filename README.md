@@ -14,8 +14,8 @@ A tic-tac-toe web application game, created with React.
 - ***X*** always goes first. A user may choose to be either ***X*** or ***O***, but whichever player is ***X*** will always go first.
 - Users may choose either ***X*** or ***O*** by clicking either of the buttons on top displaying the appropriate symbol, which also results in starting the game.
 - Clicking on an empty block before the game has started, automaticatically starts the game. This sets the player as ***X***, while placing an ***X*** in the clicked block, because again, ***X*** is always first.
-- The game will always display whose turn is it currently once the game starts.
-- A winner is determined once a player fills a block which results in at least one vertical, horizontal, or diagonal row containing only their symbol.
+- The game will always display whose turn it is once it starts.
+- A winner is determined once a player fills a block which results in at least one vertical, horizontal, or diagonal row filled, containing only that player's symbol.
 - If there is no winner after a player fills the last block, the game results in a draw.
 - Clicking on the ***Restart Game*** button below will reset the game and erase the playing board. To start another game, pick a symbol up top or fill a block on the board to immediately start the game as ***X***.
 
