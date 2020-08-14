@@ -2,8 +2,9 @@
 
 ### Screenshot:
   ![Screenshot](public/img/homepage.png)
-  
-#### [Link to Repo](https://github.com/Arathurs/Tic-Tac-Toe-V2.git/)  
+
+#### [Link to Live Site](https://arathurs.github.io/Tic-Tac-Toe/) 
+#### [Link to Repo](https://github.com/Arathurs/Tic-Tac-Toe.git/)  
 
 ### About the Project
 
