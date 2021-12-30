@@ -2,7 +2,6 @@ import React from 'react';
 import '../App.css';
 import { styles } from '../assets/styles';
 import { constants } from '../assets/constants';
-import { TableRowErrorBoundary} from './errors/TableRowErrorBoundary';
 
 export class TableRow extends React.Component {	
 	constructor(props) {		
