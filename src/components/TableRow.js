@@ -54,10 +54,7 @@ export class TableRow extends React.Component {
 			data === constants.symbols.o ? <td style={{color: styles.colors.eggShell}} key={"data_"+i} data-index={i} onClick={this.handleClick} >{data}</td> :
 			<td key={"data_"+i} data-index={i} onClick={this.handleClick} >{data}</td>	
 		));
-		return (
-			<TableRowErrorBoundary>
-				<tr>{dataPoints}</tr>
-			</ TableRowErrorBoundary>
-		);	
+		
+		return <tr>{dataPoints}</tr>;	
 	}
 }
